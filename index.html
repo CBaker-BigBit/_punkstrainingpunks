@@ -374,8 +374,10 @@
     }
     .practice-burger-stage {
       position: relative;
-      width: 100%;
+      width: min(100%, 360px);
       margin-top: auto;
+      margin-left: auto;
+      margin-right: auto;
       padding-top: 24px;
       display: flex;
       justify-content: center;
@@ -384,7 +386,7 @@
     }
     .burger-drop-zone {
       position: absolute;
-      top: 53%;
+      top: 58%;
       left: 50%;
       transform: translate(-50%, -50%);
       width: 150px;

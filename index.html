@@ -305,6 +305,148 @@
       transform: translateY(-1px);
       filter: brightness(1.08);
     }
+    .practice-cheese-test {
+      margin-top: 10px;
+      display: grid;
+      justify-items: center;
+      gap: 20px;
+    }
+    .practice-cheese-square {
+      width: min(100%, 560px);
+      min-height: 680px;
+      padding: 24px 24px 30px;
+      border: 4px solid #ff2fb8;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+      box-shadow: 0 0 0 4px rgba(255, 47, 184, 0.45), 0 24px 48px rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .practice-cheese-square h3 {
+      margin: 0 0 18px;
+      font-size: calc(34px * var(--font-scale));
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ff8bce;
+    }
+    .cheese-choice-row {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .cheese-choice {
+      border: 4px solid #000000;
+      outline: 4px solid #ff2fb8;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255, 94, 201, 0.16), rgba(0, 0, 0, 0.45));
+      padding: 10px;
+      cursor: grab;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+    .cheese-choice:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+    }
+    .cheese-choice.dragging,
+    .cheese-choice.selected {
+      transform: scale(1.02);
+      filter: brightness(1.1);
+    }
+    .cheese-choice img {
+      width: 100%;
+      height: 104px;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .cheese-choice span {
+      display: block;
+      font-size: calc(14px * var(--font-scale));
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #ffe6f7;
+      text-transform: uppercase;
+    }
+    .practice-burger-stage {
+      position: relative;
+      width: 100%;
+      margin-top: auto;
+      padding-top: 38px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      min-height: 340px;
+    }
+    .burger-drop-zone {
+      position: absolute;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 180px;
+      height: 120px;
+      border: 4px dashed rgba(255, 230, 247, 0.7);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #ffe6f7;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      z-index: 2;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .burger-drop-zone.is-over {
+      background: rgba(255, 94, 201, 0.18);
+      border-color: #ff2fb8;
+    }
+    .burger-drop-zone.has-cheese {
+      border-style: solid;
+      background: transparent;
+      color: transparent;
+    }
+    .placed-cheese {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: none;
+      border-radius: 18px;
+    }
+    .burger-drop-zone.has-cheese .placed-cheese {
+      display: block;
+    }
+    .practice-burger-image {
+      width: min(100%, 360px);
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.42));
+    }
+    .practice-test2-actions {
+      width: min(100%, 560px);
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .practice-test2-feedback {
+      min-height: 28px;
+      font-size: calc(18px * var(--font-scale));
+      font-weight: 700;
+      color: #ffffff;
+      text-align: center;
+    }
+    .practice-test2-feedback.correct {
+      color: #7dffbb;
+    }
+    .practice-test2-feedback.incorrect {
+      color: #ff8eb7;
+    }
     .food-card h2 {
       font-family: var(--font-display);
       font-size: calc(32px * var(--font-scale));
@@ -1113,7 +1255,37 @@
       </div>
 
       <div class="sub-tab-content" id="practice-test-2">
-        <p class="test-instruction">Practice Test #2 will go here.</p>
+        <p class="test-instruction">Drag the correct cheese onto the burger, then submit your answer.</p>
+        <div class="practice-cheese-test">
+          <div class="practice-cheese-square">
+            <h3>OG PUNK</h3>
+            <div class="cheese-choice-row">
+              <div class="cheese-choice" draggable="true" data-cheese="swiss" data-image="./swiss.jpg">
+                <img src="./swiss.jpg" alt="Swiss cheese" />
+                <span>Swiss</span>
+              </div>
+              <div class="cheese-choice" draggable="true" data-cheese="american" data-image="./american.jpg">
+                <img src="./american.jpg" alt="American cheese" />
+                <span>American</span>
+              </div>
+              <div class="cheese-choice" draggable="true" data-cheese="cheddar" data-image="./cheddar.jpg">
+                <img src="./cheddar.jpg" alt="Cheddar cheese" />
+                <span>Cheddar</span>
+              </div>
+            </div>
+            <div class="practice-burger-stage">
+              <div class="burger-drop-zone" id="ogPunkCheeseDropZone">Drop Cheese Here
+                <img class="placed-cheese" id="ogPunkPlacedCheese" src="" alt="Placed cheese" />
+              </div>
+              <img class="practice-burger-image" src="./burger.jpg" alt="OG Punk burger" />
+            </div>
+          </div>
+          <div class="practice-test2-actions">
+            <button id="practiceTest2Submit" class="menu-link-button" type="button">Submit Answer</button>
+            <button id="practiceTest2Reset" class="menu-link-button" type="button" style="background: #21002f; border-color: #ff9ee3; color: #ff9ee3;">Reset</button>
+          </div>
+          <p id="practiceTest2Feedback" class="practice-test2-feedback"></p>
+        </div>
       </div>
 
       <div class="sub-tab-content" id="practice-test-3">
@@ -1616,6 +1788,13 @@
     const clearTestButton = document.getElementById('clearTestButton');
     const gradeResult = document.getElementById('gradeResult');
     const serverNameInput = document.getElementById('serverNameInput');
+    const cheeseChoices = Array.from(document.querySelectorAll('.cheese-choice'));
+    const ogPunkCheeseDropZone = document.getElementById('ogPunkCheeseDropZone');
+    const ogPunkPlacedCheese = document.getElementById('ogPunkPlacedCheese');
+    const practiceTest2Submit = document.getElementById('practiceTest2Submit');
+    const practiceTest2Reset = document.getElementById('practiceTest2Reset');
+    const practiceTest2Feedback = document.getElementById('practiceTest2Feedback');
+    let placedCheeseKey = '';
 
 
     const normalizeAnswer = value => value
@@ -1706,6 +1885,100 @@
     };
 
     initializeBlankDropdowns();
+
+    const setPlacedCheese = (cheeseKey, imageSrc) => {
+      if (!ogPunkCheeseDropZone || !ogPunkPlacedCheese) return;
+
+      placedCheeseKey = cheeseKey;
+      ogPunkPlacedCheese.src = imageSrc;
+      ogPunkPlacedCheese.alt = `${cheeseKey} cheese`;
+      ogPunkCheeseDropZone.classList.add('has-cheese');
+      cheeseChoices.forEach(choice => {
+        choice.classList.toggle('selected', choice.dataset.cheese === cheeseKey);
+      });
+    };
+
+    const resetPracticeTest2 = () => {
+      placedCheeseKey = '';
+      if (ogPunkPlacedCheese) {
+        ogPunkPlacedCheese.src = '';
+        ogPunkPlacedCheese.alt = 'Placed cheese';
+      }
+      if (ogPunkCheeseDropZone) {
+        ogPunkCheeseDropZone.classList.remove('has-cheese', 'is-over');
+      }
+      cheeseChoices.forEach(choice => choice.classList.remove('selected', 'dragging'));
+      if (practiceTest2Feedback) {
+        practiceTest2Feedback.textContent = '';
+        practiceTest2Feedback.classList.remove('correct', 'incorrect');
+      }
+    };
+
+    cheeseChoices.forEach(choice => {
+      choice.addEventListener('dragstart', event => {
+        event.dataTransfer?.setData('text/plain', JSON.stringify({
+          cheese: choice.dataset.cheese,
+          image: choice.dataset.image,
+        }));
+        choice.classList.add('dragging');
+      });
+
+      choice.addEventListener('dragend', () => {
+        choice.classList.remove('dragging');
+      });
+
+      choice.addEventListener('click', () => {
+        setPlacedCheese(choice.dataset.cheese || '', choice.dataset.image || '');
+      });
+    });
+
+    if (ogPunkCheeseDropZone) {
+      ogPunkCheeseDropZone.addEventListener('dragover', event => {
+        event.preventDefault();
+        ogPunkCheeseDropZone.classList.add('is-over');
+      });
+
+      ogPunkCheeseDropZone.addEventListener('dragleave', () => {
+        ogPunkCheeseDropZone.classList.remove('is-over');
+      });
+
+      ogPunkCheeseDropZone.addEventListener('drop', event => {
+        event.preventDefault();
+        ogPunkCheeseDropZone.classList.remove('is-over');
+        const payload = event.dataTransfer?.getData('text/plain') || '';
+        if (!payload) return;
+
+        try {
+          const { cheese, image } = JSON.parse(payload);
+          setPlacedCheese(cheese || '', image || '');
+        } catch {
+          // Ignore malformed drag payloads.
+        }
+      });
+    }
+
+    practiceTest2Submit?.addEventListener('click', () => {
+      if (!practiceTest2Feedback) return;
+
+      practiceTest2Feedback.classList.remove('correct', 'incorrect');
+
+      if (!placedCheeseKey) {
+        practiceTest2Feedback.textContent = 'Drag a cheese onto the burger before submitting.';
+        practiceTest2Feedback.classList.add('incorrect');
+        return;
+      }
+
+      if (placedCheeseKey === 'american') {
+        practiceTest2Feedback.textContent = 'Correct! OG Punk gets American cheese.';
+        practiceTest2Feedback.classList.add('correct');
+        return;
+      }
+
+      practiceTest2Feedback.textContent = 'Wrong. Try again. OG Punk does not use that cheese.';
+      practiceTest2Feedback.classList.add('incorrect');
+    });
+
+    practiceTest2Reset?.addEventListener('click', resetPracticeTest2);
 
     const gradeBlankMenuTest = () => {
       const blanks = Array.from(document.querySelectorAll('#blank-menu-test .blank-input'));

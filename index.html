@@ -903,6 +903,7 @@
       </div>
     </div>
     <div class="tab-content section-card" id="food-pics" style="display: none; font-size: 18px;">
+      <div class="sub-tab-group">
       <div class="sub-tab-bar">
         <button class="sub-tab-button active" data-subtab="burgers-tab">BURGERS</button>
         <button class="sub-tab-button" data-subtab="wings-tab">WINGS</button>
@@ -1029,6 +1030,7 @@
           </div>
         </div>
       </div>
+      </div>
 
       <p class="note">Deployment note: upload this HTML file together with the <code>bp-assets-web</code> folder in the same GitHub directory so all image and slideshow links resolve correctly.</p>
     </div>
@@ -1064,6 +1066,14 @@
     </div>
     <div class="tab-content section-card" id="blank-menu-test" style="display: none; font-size: 18px;">
       <h2 style="font-size: 38px; margin-bottom: 18px;">PRACTICE TEST</h2>
+      <div class="sub-tab-group">
+      <div class="sub-tab-bar">
+        <button class="sub-tab-button active" data-subtab="practice-test-1">PRACTICE TEST #1</button>
+        <button class="sub-tab-button" data-subtab="practice-test-2">PRACTICE TEST #2</button>
+        <button class="sub-tab-button" data-subtab="practice-test-3">PRACTICE TEST #3</button>
+      </div>
+
+      <div class="sub-tab-content active" id="practice-test-1">
       <p class="test-instruction">Select the correct missing ingredient from the dropdowns. Only some key ingredients are missing from each item.</p>
       <div class="test-name-entry" style="margin-top: 18px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
         <label style="color: #f9d2eb; font-size: 16px;">Server Name:</label>
@@ -1100,6 +1110,16 @@
         <button id="clearTestButton" class="menu-link-button" style="background: #21002f; border-color: #ff9ee3; color: #ff9ee3;">Clear Answers</button>
       </div>
       <p id="gradeResult" class="test-feedback"></p>
+      </div>
+
+      <div class="sub-tab-content" id="practice-test-2">
+        <p class="test-instruction">Practice Test #2 will go here.</p>
+      </div>
+
+      <div class="sub-tab-content" id="practice-test-3">
+        <p class="test-instruction">Practice Test #3 will go here.</p>
+      </div>
+      </div>
     </div>
     <div class="tab-content section-card" id="practice-flash-cards" style="display: none; font-size: 18px;">
       <h2 style="font-size: 38px; margin-bottom: 18px;">PRACTICE FLASH CARDS</h2>
@@ -1126,7 +1146,6 @@
     const buttons = document.querySelectorAll('.tab-button, .study-flash-button');
     const contents = document.querySelectorAll('.tab-content');
     const subButtons = document.querySelectorAll('.sub-tab-button');
-    const subContents = document.querySelectorAll('.sub-tab-content');
 
     const assetBases = ['./bp-assets-web/', 'bp-assets-web/', '../bp-assets-web/'];
     const normalizeAssetFileName = value => {
@@ -1230,10 +1249,17 @@
 
     subButtons.forEach(button => {
       button.addEventListener('click', () => {
-        subButtons.forEach(btn => btn.classList.remove('active'));
-        subContents.forEach(content => content.classList.remove('active'));
+        const group = button.closest('.sub-tab-group');
+        if (!group) return;
+
+        const groupButtons = group.querySelectorAll('.sub-tab-button');
+        const groupContents = group.querySelectorAll('.sub-tab-content');
+
+        groupButtons.forEach(btn => btn.classList.remove('active'));
+        groupContents.forEach(content => content.classList.remove('active'));
         button.classList.add('active');
         const selected = document.getElementById(button.dataset.subtab);
+        if (!selected) return;
         selected.classList.add('active');
       });
     });

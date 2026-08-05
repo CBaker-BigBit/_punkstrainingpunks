@@ -1472,14 +1472,14 @@
         card.innerHTML = `
           <div class="flash-card-inner">
             <div class="flash-card-face flash-card-front">
-              <h3>${title}</h3>
-              <img src="${img.src}" alt="${title}" />
+              <h3>INGREDIENTS</h3>
+              <p class="flash-menu-item">${recipeText}</p>
               <button class="flip-card-button" type="button">FLIP FOR MENU ITEM</button>
             </div>
             <div class="flash-card-face flash-card-back">
               <h3>${title}</h3>
-              <p class="flash-menu-item">${recipeText}</p>
-              <button class="flip-card-button" type="button">BACK TO PHOTO</button>
+              <img src="${img.src}" alt="${title}" />
+              <button class="flip-card-button" type="button">BACK TO INGREDIENTS</button>
             </div>
           </div>
         `;

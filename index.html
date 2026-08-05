@@ -269,6 +269,20 @@
       font-weight: 700;
       margin-bottom: 16px;
     }
+    .flash-ingredient-list {
+      margin: 0 0 16px;
+      padding-left: 22px;
+      text-align: left;
+      list-style: disc;
+      columns: 1;
+    }
+    .flash-ingredient-list li {
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.55;
+      color: #ffe6f7;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
     .flip-card-button {
       margin-top: auto;
       width: 100%;
@@ -1465,6 +1479,12 @@
         .trim();
     };
 
+    const extractIngredientItems = recipeText => recipeText
+      .replace(/;/g, ',')
+      .split(',')
+      .map(part => part.trim())
+      .filter(Boolean);
+
     const buildFlashCards = () => {
       if (!flashCardGrid) return;
       flashCardGrid.innerHTML = '';
@@ -1473,6 +1493,7 @@
         const foodKey = normalizeKey(item.dataset.food || '');
         const title = item.querySelector('strong')?.textContent.trim() || foodKey;
         const recipeText = extractMenuItemText(item);
+        const ingredientItems = extractIngredientItems(recipeText);
         const img = foodImagesByAlt[foodKey];
         if (!img) return;
 
@@ -1482,7 +1503,7 @@
           <div class="flash-card-inner">
             <div class="flash-card-face flash-card-front">
               <h3>INGREDIENTS</h3>
-              <p class="flash-menu-item">${recipeText}</p>
+              <ul class="flash-ingredient-list">${ingredientItems.map(ingredient => `<li>${ingredient}</li>`).join('')}</ul>
               <button class="flip-card-button" type="button">FLIP FOR MENU ITEM</button>
             </div>
             <div class="flash-card-face flash-card-back">

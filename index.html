@@ -286,21 +286,24 @@
     .flip-card-button {
       margin-top: auto;
       width: 100%;
-      border: 3px solid #ff2fb8;
+      border: 4px solid #000000;
+      outline: 4px solid #ff2fb8;
+      outline-offset: 0;
       border-radius: 999px;
-      background: #ff2fb8;
-      color: #100010;
+      background: linear-gradient(180deg, #ff5ec9 0%, #7a1f63 45%, #000000 100%);
+      color: #ffe6f7;
       font-weight: 800;
       font-size: calc(14px * var(--font-scale));
       letter-spacing: 0.08em;
       text-transform: uppercase;
       padding: 12px 14px;
       cursor: pointer;
-      transition: transform 0.2s ease, background 0.2s ease;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.45);
+      transition: transform 0.2s ease, filter 0.2s ease;
     }
     .flip-card-button:hover {
       transform: translateY(-1px);
-      background: #ff7ce4;
+      filter: brightness(1.08);
     }
     .food-card h2 {
       font-family: var(--font-display);
